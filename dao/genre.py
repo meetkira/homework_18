@@ -1,9 +1,16 @@
-# это файл для классов доступа к данным (Data Access Object). Здесь должен быть класс с методами доступа к данным
-# здесь в методах можно построить сложные запросы к БД
+from sqlalchemy.orm import Session
 
-# Например
+from dao.model.genre import Genre
 
-# class BookDAO:
-#     def get_all_books(self):
-#         books = Book.query.all()
-#         return
+
+class GenreDAO():
+    """Genre DAO class"""
+
+    def __init__(self, session: Session):
+        self.session = session
+
+    def get_all(self):
+        return Genre.query.all()
+
+    def get_one(self, gid):
+        return self.session.query(Genre).filter(Genre.id == gid).one()

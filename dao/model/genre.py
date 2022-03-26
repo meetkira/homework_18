@@ -1,9 +1,16 @@
+from marshmallow import Schema, fields
+
 from setup_db import db
 
 
 class Genre(db.Model):
-    __tablename__ = 'genres'
+    """Genre database model"""
+    __tablename__ = 'genre'
     id = db.Column(db.Integer, primary_key=True)
-    name = db.Column(db.String(255))
+    name = db.Column(db.String(50), nullable=False)
 
-    movies = db.relationship('Movie')
+
+class GenreSchema(Schema):
+    """Genre Schema"""
+    id = fields.Int()
+    name = fields.Str()
